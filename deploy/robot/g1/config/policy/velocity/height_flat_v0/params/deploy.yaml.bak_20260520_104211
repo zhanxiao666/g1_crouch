@@ -1,0 +1,93 @@
+joint_ids_map: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]
+step_dt: 0.02
+stiffness: [40.2, 99.1, 40.2, 99.1, 28.5, 28.5, 40.2, 99.1, 40.2, 99.1, 28.5, 28.5, 40.2, 28.5, 28.5,
+            14.3, 14.3, 14.3, 14.3, 14.3, 16.8, 16.8, 14.3, 14.3, 14.3, 14.3, 14.3, 16.8, 16.8]
+damping:   [2.6, 6.3, 2.6, 6.3, 1.8, 1.8, 2.6, 6.3, 2.6, 6.3, 1.8, 1.8, 2.6, 1.8, 1.8,
+            0.9, 0.9, 0.9, 0.9, 0.9, 1.1, 1.1, 0.9, 0.9, 0.9, 0.9, 0.9, 1.1, 1.1]
+default_joint_pos: [-0.312,0,0,0.669,-0.363,0, -0.312,0,0,0.669,-0.363,0, 0,0,0, 0.2,0.2,0,0.6,0,0,0, 0.2,-0.2,0,0.6,0,0,0]
+
+deploy_noise:
+  enabled: false
+
+action_delay:
+  enabled: false
+  max_lag: 1
+  hold_prob: 0.03
+
+commands:
+  twist:
+    debug_arm_actions: false
+    stick_deadzone: 0.10
+    # While squatting, the right arm is externally controlled:
+    # fresh LCM IK target -> follow IK; no target/timeout -> smoothly return to zero.
+    right_arm_ik_action_channel: arm_action_data
+    right_arm_ik_state_channel: body_control_data
+    right_arm_ik_timeout: 0.20
+    right_arm_ik_source_offset: 0
+    right_arm_external_height_threshold: 0.74
+    right_arm_ik_blend: 0.20
+    right_arm_zero_max_speed: 0.35
+    mask_right_arm_observation_during_external: true
+    height_step: 0.02
+    ranges:
+      lin_vel_x: [-1.0, 1.0]
+      lin_vel_y: [-0.5, 0.5]
+      ang_vel_z: [-0.5, 0.5]
+      base_height: [0.5, 0.76]
+actions:
+  JointPositionAction:
+    alpha: 1.0
+    clip: null
+    joint_names: [.*]
+    scale: [0.547546, 0.350661, 0.547546, 0.350661, 0.438577, 0.438577,
+            0.547546, 0.350661, 0.547546, 0.350661, 0.438577, 0.438577,
+            0.547546, 0.438577, 0.438577,
+            0.080000, 0.080000, 0.080000, 0.080000, 0.040000, 0.025000, 0.025000,
+            0.080000, 0.080000, 0.080000, 0.080000, 0.040000, 0.025000, 0.025000]
+    offset: [-0.312,0,0,0.669,-0.363,0, -0.312,0,0,0.669,-0.363,0,
+             0,0,0, 0.2,0.2,0,0.6,0,0,0, 0.2,-0.2,0,0.6,0,0,0]
+    joint_ids: null
+observations:
+  base_ang_vel:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0]
+    noise_uniform: [-0.2, 0.2]
+    history_length: 4
+  projected_gravity:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0]
+    noise_uniform: [-0.05, 0.05]
+    history_length: 4
+  joint_pos_rel:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    noise_uniform: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01,
+                    0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01,
+                    0.01, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    history_length: 4
+  joint_vel_rel:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    noise_uniform: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5,
+                    1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5,
+                    1.5, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    history_length: 4
+  last_action:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    history_length: 4
+  velocity_height_commands:
+    params: {}
+    clip: null
+    scale: [1.0, 1.0, 1.0, 1.0]
+    history_length: 4
+  # false keeps term-first history layout: term0[4 frames], term1[4 frames], ...
+  use_gym_history: false

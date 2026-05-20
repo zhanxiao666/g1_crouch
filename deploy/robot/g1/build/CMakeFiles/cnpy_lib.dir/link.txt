@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcnpy_lib.a CMakeFiles/cnpy_lib.dir/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/thirdparty/cnpy/cnpy.cpp.o CMakeFiles/cnpy_lib.dir/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/thirdparty/cnpy/example1.cpp.o
+/usr/bin/ranlib libcnpy_lib.a

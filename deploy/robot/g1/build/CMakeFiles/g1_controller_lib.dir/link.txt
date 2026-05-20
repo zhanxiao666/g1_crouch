@@ -1,0 +1,2 @@
+/usr/bin/ar qc libg1_controller_lib.a CMakeFiles/g1_controller_lib.dir/src/RightArmIKLCMBridge.cpp.o CMakeFiles/g1_controller_lib.dir/src/State_Mimic.cpp.o CMakeFiles/g1_controller_lib.dir/src/State_RLBase.cpp.o
+/usr/bin/ranlib libg1_controller_lib.a

@@ -1,0 +1,5 @@
+/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/robots/g1/build/CMakeFiles/cnpy_lib.dir
+/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/robots/g1/build/CMakeFiles/g1_controller_lib.dir
+/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/robots/g1/build/CMakeFiles/g1_ctrl.dir
+/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/robots/g1/build/CMakeFiles/edit_cache.dir
+/home/zx/Code/GITHUB/unitree_rl_mjlab/deploy/robots/g1/build/CMakeFiles/rebuild_cache.dir
